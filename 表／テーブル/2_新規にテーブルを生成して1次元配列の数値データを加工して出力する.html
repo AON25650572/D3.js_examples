@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>新規にテーブルを生成して1次元配列の数値データを加工して出力する</title>
+        <link rel="stylesheet" href="../css/main.css">
+        <style>
+            table,td { border: 1px solid black; }
+        </style>
+        <script src="../d3.v3.min.js"></script>
+    </head>
+
+    <body>
+        <h1>新規にテーブルを生成して1次元配列の数値データを加工して出力する</h1>
+        <div id="result"></div>
+        
+        <script>
+            var list = [10, 30, 23, 45, 65, 30, 67];
+            var tbl = d3.select("#result") // div#result内に出力
+                .append("table") // table要素を追加
+                .selectAll("tr") // tr要素を対象にする
+                .data(list) // 出力するデータ
+                .enter() // データ数だけ要素を出力
+                .append("tr")
+                .append("td")
+                .text(function(d){ // データ内容を出力
+                    return d + " cm";
+                })
+        </script>
+    </body>
+</html>

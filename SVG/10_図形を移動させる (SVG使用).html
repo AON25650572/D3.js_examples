@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>図形を移動させる (SVG使用)</title>
+        <link rel="stylesheet" href="../css/main.css">
+        <script src="../d3.v3.min.js"></script>
+    </head>
+
+    <body>
+        <h1>図形を移動させる (SVG使用)</h1>
+        <div id="result"></div>
+
+        <script>
+            d3.select("#result")
+                .append("svg")
+                .attr("width", 240)
+                .attr("height", 320)
+                .append("rect")
+                    .attr("x", 80)
+                    .attr("y", 60)
+                    .attr("width", 100)
+                    .attr("height", 100)
+                    .attr("stroke", "blue")
+                    .attr("fill", "cyan")
+                    .attr("stroke-width", 2)
+                    .attr("transform", "translate(-70,110)");
+        </script>
+    </body>
+</html>

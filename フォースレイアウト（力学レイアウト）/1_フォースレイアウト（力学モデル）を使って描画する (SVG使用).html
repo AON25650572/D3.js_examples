@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>フォースレイアウト（力学モデル）を使って描画する (SVG使用)</title>
+        <link rel="stylesheet" href="../css/main.css">
+        <script src="../d3.v3.min.js"></script>
+    </head>
+
+    <body>
+        <h1>フォースレイアウト（力学モデル）を使って描画する (SVG使用)</h1>
+        <div id="myGraph"></div>
+
+        <script>
+            var list = {
+                nodes : [ // ノードリスト
+                    { name : "mz-700" },
+                    { name : "PC-6001" },
+                    { name : "FM-7" }
+                ],
+                links : [ // ノードとノードを結ぶ線の関係。配列要素野順番をID・参照番号都市て利用している
+                    { source : 0, target : 1 },
+                    { source : 0, target : 2 },
+                    { source : 1, target : 2 }
+                ]
+            };
+
+            var svgWidth = 320; // svg領域の横幅
+            var svgHeight = 240; // svg領域の縦幅
+            var svg = d3.select("#myGraph")
+                .append("svg")
+                .attr("width", svgWidth)
+                .attr("height", svgHeight)
+            // Force Layoutを設定
+            var force = d3.layout.force()
+                .nodes(list.nodes) // ノードを指定
+                .links(list.links) // ノードとノードを結ぶリンク線を指定
+                .size([svgWidth, svgHeight])
+                .linkDistance(160)
+                .start();
+            // ノードとノードを結ぶ線を描画
+            var link = svg.selectAll("line")
+                    .data(list.links)
+                    .enter()
+                    .append("line")
+                    .style("stroke", "red")
+                    .style("stroke-width", 5);
+            // ノードを示す円（●）を描画
+            var node = svg.selectAll("circle") // 円を作成
+                .data(list.nodes)
+                .enter()
+                .append("circle") // circle要素を追加
+                    .attr("r", 10);  // 半径は10
+            // 再描画時に線を追加
+            force.on("tick", function(){
+                link.attr("x1", function(d){ return d.source.x; })
+                    .attr("y1", function(d){ return d.source.y; })
+                    .attr("x2", function(d){ return d.target.x; })
+                    .attr("y2", function(d){ return d.target.y; });
+                node.attr("cx", function(d){ return d.x; })
+                    .attr("cy", function(d){ return d.y; })
+            });
+        </script>
+    </body>
+</html>

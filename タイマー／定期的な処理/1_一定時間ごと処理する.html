@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>一定時間ごと処理する</title>
+        <link rel="stylesheet" href="../css/main.css">
+        <script src="../d3.v3.min.js"></script>
+    </head>
+
+    <body>
+        <h1>一定時間ごと処理する</h1>
+        <div id="result"></div>
+
+        <script>
+            d3.timer(function(){ // タイマー設定
+                d3.select("#result").text(new Date()); // 定期的に処理する内容
+            });
+        </script>
+    </body>
+</html>

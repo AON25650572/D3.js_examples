@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>あらかじめ定義してある20色を使用する</title>
+        <link rel="stylesheet" href="../css/main.css">
+        <script src="../d3.v3.min.js"></script>
+    </head>
+
+    <body>
+        <h1>あらかじめ定義してある20色を使用する</h1>
+        <div id="myGraph"></div>
+
+        <script>
+            var list = [5, 5, 12, 3, 2, 3, 8, 12, 17, 7, 3, 10, 8, 5];
+            var color = d3.scale.category20(); // 20色を指定
+            var svgWidth = 320; // SVGの領域の横幅
+            var svgHeight = 240; // SVGの領域の立幅
+            // SVGの表示領域を生成
+            var svg = d3.select("#myGraph")
+                .append("svg")
+                    .attr("width", svgWidth)
+                    .attr("heigh", svgHeight);
+            // 円グラフを作成
+            var pie = d3.layout.pie()
+                .value(function(d){ return d; });
+            // 円グラフのサイズを指定
+            var arc = d3.svg.arc().innerRadius(40).outerRadius(100);
+            // 円グラフを描画
+            svg.selectAll("path")
+                .data(pie(list))
+                .enter()
+                .append("path") // 円弧はpathで指定する
+                    .attr("d", arc) // 円弧を設定
+                    .attr("stroke", "white") // 円グラフの区切り線を白色にする
+                    .attr("fill", function(d, i){
+                        return color(i);
+                    })
+                    .attr("transform", "translate(" + svgWidth/2 + ", " + svgHeight/2 + ")") // 円グラフをSVG領域の中心にする
+        </script>
+    </body>
+</html>

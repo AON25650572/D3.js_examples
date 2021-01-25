@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>一定時間経過後にアニメーションさせる</title>
+        <link rel="stylesheet" href="../css/main.css">
+        <script src="../d3.v3.min.js"></script>
+    </head>
+
+    <body>
+        <h1>一定時間経過後にアニメーションさせる</h1>
+        <div id="result"></div>
+
+        <script>
+            d3.select("#result")
+                .append("svg")
+                .attr("width", 320)
+                .attr("height", 240)
+                .append("rect")
+                    .attr("x", 80)  // x座標を指定
+                    .attr("y", 60)  // y座標を指定
+                    .attr("width", 0)   // 横幅を指定
+                    .attr("height", 100)    // 縦幅を指定
+                    .attr("stroke", "blue") // 青色にする
+                    .attr("fill", "cyan")   // 塗りは水色にする
+                    .attr("stroke-width", 1)    // 線幅を指定
+                .transition().delay(2000) // 2秒待ってからアニメーションする
+                    .attr("stroke-width", 10) // 最終的な線幅を指定
+                    .attr("width", 200) // 最終的な横幅を指定
+        </script>
+    </body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>要素内のテキストデータを読み出す</title>
+        <link rel="stylesheet" href="../css/main.css">
+        <script src="../d3.v3.min.js"></script>
+    </head>
+
+    <body>
+        <h1>要素内のテキストデータを読み出す</h1>
+        <div id="testText">ここが<b>HTML</b>を含む文字です</div>
+        
+        <script>
+            var str = d3.select("#testText").text();
+            alert(str)
+        </script>
+    </body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>JSONデータ/オブジェクトからキーと値を取り出す (entries)</title>
+        <link rel="stylesheet" href="../css/main.css">
+        <script src="../d3.v3.min.js"></script>
+    </head>
+
+    <body>
+        <h1>JSONデータ/オブジェクトからキーと値を取り出す (entries)</h1>
+        <div id="result"></div>
+        
+        <script>
+            var data = { mz : 700 };
+            var result = d3.entries(data);
+            alert("Key = "+result[0].key);
+            alert("Value = "+result[0].value);
+            console.dir(result);
+        </script>
+    </body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>連続直線（ポリライン）を描画する (SVG使用)</title>
+        <link rel="stylesheet" href="../css/main.css">
+        <script src="../d3.v3.min.js"></script>
+    </head>
+
+    <body>
+        <h1>連続直線（ポリライン）を描画する (SVG使用)</h1>
+        <div id="result"></div>
+
+        <script>
+            d3.select("#result")
+                .append("svg")
+                .attr("width", 350)
+                .attr("height", 240)
+                .append("polyline") // ポリラインを追加。以後のメソッドは、このポリラインに対しての設定になる
+                    .attr("points", "10,10 100,20 130,50 30,200") // xy座標を複数指定
+                    .attr("stroke", "red") // 赤色にする
+                    .attr("fill", "none") // 塗りは無しにする
+                    .attr("stroke-width", 2) // 線幅を指定
+        </script>
+    </body>
+</html>

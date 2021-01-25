@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>DOM要素の属性値を設定する</title>
+        <link rel="stylesheet" href="../css/main.css">
+        <script src="../d3.v3.min.js"></script>
+    </head>
+
+    <body>
+        <h1>DOM要素の属性値を設定する</h1>
+        <img src="images/1.jpg" width="384" height="216" id="myPhoto" alt="changeimg">
+        
+        <script>
+            d3.select("#myPhoto").on("click", function(){
+                d3.select(this).attr("src", "images/2.jpg");
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>データ内の項目内容を既存の要素に書き出す(2)</title>
+        <link rel="stylesheet" href="../css/main.css">
+        <script src="../d3.v3.min.js"></script>
+    </head>
+
+    <body>
+        <h1>データ内の項目内容を既存の要素に書き出す(2)</h1>
+        <div id="dataList">
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+        </div>
+
+        <script>
+            d3.selectAll("#dataList p")
+                .data(["iPhone", "iPad", "Android", "Windows Phone"])
+                .text(function(d){ return d; })
+        </script>
+    </body>
+</html>

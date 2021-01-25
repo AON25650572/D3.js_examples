@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>1秒ごとに更新されるデータをテーブルに出力する</title>
+        <link rel="stylesheet" href="../css/main.css">
+        <style>
+            table,td { border: 1px solid black; }
+        </style>
+        <script src="../d3.v3.min.js"></script>
+    </head>
+
+    <body>
+        <h1>1秒ごとに更新されるデータをテーブルに出力する</h1>
+        <table id="result"></table>
+        
+        <script>
+            setInterval(function(){
+                var list = [];
+                // ランダムな個数でデータを作成
+                var n = Math.floor(Math.random() * 10) + 1;
+                for(var i=0; i<n; i++){
+                    list.push(Math.floor(Math.random() * 1000));
+                }
+                outputData(); // 生成
+                removeData(); // 削除
+                updateData(); // 更新
+                // 要素を出力する関数
+                function outputData(){
+                    d3.select("#result") // table要素を選択
+                        .selectAll("tr") // tr要素を__data__保存の対象にする
+                        .data(list) // 対象になるでーた
+                        .enter() // データの数だけ以下の続く要素を追加
+                        .append("tr") // tr要素を追加
+                        .append("td") // td要素を追加
+                }
+                // 要素（とデータ）を削除する関数
+                function removeData(){
+                    d3.select("#result") // table要素を選択
+                        .selectAll("tr") // tr要素を削除対象にする
+                        .data(list) // 対象になるデータ
+                        .exit() // 要素数がリスト数より多い場合は以下の処理を実行
+                        .remove(); // 要素を削除する
+                }
+                // 要素の内容を更新する関数
+                function updateData(){
+                    d3.select("#result") // table要素を選択
+                        .selectAll("td") // データの出力先をtd要素を対象にする
+                        .data(list) // 対象になるデータ
+                        .text(String); // 内容をそのまま文字列で出力
+                }
+            }, 1000);
+        </script>
+    </body>
+</html>

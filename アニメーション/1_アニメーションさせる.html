@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>アニメーションさせる</title>
+        <link rel="stylesheet" href="../css/main.css">
+        <script src="../d3.v3.min.js"></script>
+    </head>
+
+    <body>
+        <h1>アニメーションさせる</h1>
+        <div id="result"></div>
+
+        <script>
+            d3.select("#result")
+                .append("svg")
+                .attr("width", 320)
+                .attr("height", 240)
+                .append("rect")
+                    .attr("x", 80)
+                    .attr("y", 60)
+                    .attr("width", 100)
+                    .attr("height", 100)
+                    .attr("stroke", "blue")
+                    .attr("fill", "cyan")
+                    .attr("stroke-width", 1)
+                .transition()
+                    .attr("stroke-width", 10) // 最終的な線幅を指定
+                    .attr("width", 200) // 最終的な横幅を指定
+        </script>
+    </body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>JSON形式のファイルを読み込む</title>
+        <link rel="stylesheet" href="../css/main.css">
+        <script src="../d3.v3.min.js"></script>
+    </head>
+
+    <body>
+        <h1>JSON形式のファイルを読み込む</h1>
+        <div id="result"></div>
+
+        <script>
+            d3.json("data.json", function(error, data) {
+              var text = "";
+              for(var i=0; i<data.length; i++){
+                  text += data[i].label + " = " + data[i].value + "<br>";
+              }
+              d3.select("#result").html(text);
+            });
+        </script>
+    </body>
+</html>

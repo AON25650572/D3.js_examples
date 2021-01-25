@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>複数のDOM要素をノードで指定する</title>
+        <link rel="stylesheet" href="../css/main.css">
+        <script src="../d3.v3.min.js"></script>
+    </head>
+
+    <body>
+        <h1>複数のDOM要素をノードで指定する</h1>
+        <div id="root">
+            <p></p>
+            <p></p>
+            <p></p>
+        </div>
+
+        <script>
+            var r = document.getElementById("root");
+            var e = r.getElementsByTagName("p");
+            d3.selectAll(e).text("まとめて書き込んでいます")
+        </script>
+    </body>
+</html>

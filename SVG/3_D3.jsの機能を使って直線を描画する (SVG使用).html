@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>D3.jsの機能を使って直線を描画する (SVG使用)</title>
+        <link rel="stylesheet" href="../css/main.css">
+        <script src="../d3.v3.min.js"></script>
+    </head>
+
+    <body>
+        <h1>D3.jsの機能を使って直線を描画する (SVG使用)</h1>
+        <div id="result"></div>
+
+        <script>
+            var svg = d3.select("#result")
+                .append("svg")
+                .attr("width", 320)
+                .attr("height", 240)
+                // データに応じて線を秒がするための座標を返す関数
+                var line = d3.svg.line()
+                    .x(function(d){ return d[0]; })
+                    .y(function(d){ return d[1]; })
+                svg.append("path") // パスを追加
+                    .attr("d", line([[100, 20], [300, 100]])) // 配列の座標を渡してpath要素のd属性に設定
+                    .attr("stroke", "black")
+                    .attr("fill", "none")
+        </script>
+    </body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>DOM要素を直接指定する</title>
+        <link rel="stylesheet" href="../css/main.css">
+        <script src="../d3.v3.min.js"></script>
+    </head>
+
+    <body>
+        <h1>DOM要素を直接指定する</h1>
+        <div id="result"></div>
+
+        <script>
+            var e = document.getElementById("result");
+            d3.select(e).text("直接要素を指定して書き込んでいます");
+        </script>
+    </body>
+</html>

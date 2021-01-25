@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>CSVファイルを読み込んでデータを出力する（1行に複数のデータがある場合）</title>
+        <link rel="stylesheet" href="../css/main.css">
+        <style>
+            table,td { border: 1px solid black; }
+        </style>
+        <script src="../d3.v3.min.js"></script>
+    </head>
+
+    <body>
+        <h1>CSVファイルを読み込んでデータを出力する（1行に複数のデータがある場合）</h1>
+        <div id="result"></div>
+        
+        <script>
+            d3.csv("data.csv", function(error, list){
+                d3.select("#result")    // div#result内に出力
+                .append("table")    // table要素を追加
+                .selectAll("tr")    // tr要素を対象にする
+                .data(list) // 出力するデータ
+                .enter()    // データ数だけ要素を生成
+                .append("tr")
+                .selectAll("td")
+                .data(function(row){    // 1行ごとに処理
+                    return d3.entries(row);
+                })
+                .enter()
+                .append("td")
+                .text(function(d){  // データ内容を出力
+                    return d.value;
+                })
+            });
+        </script>
+    </body>
+</html>

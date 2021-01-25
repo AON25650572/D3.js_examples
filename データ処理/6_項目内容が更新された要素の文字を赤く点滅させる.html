@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>項目内容が更新された要素の文字を赤く点滅させる</title>
+        <link rel="stylesheet" href="../css/main.css">
+        <script src="../d3.v3.min.js"></script>
+    </head>
+
+    <body>
+        <h1>項目内容が更新された要素の文字を赤く点滅させる</h1>
+        <button id="btn">1ヶ所ずつデータを更新</button>
+        <div id="result"></div>
+
+        <script>
+            var dataList = [10, 50, 60, 30, 25];
+            // データを新たに生成する
+            var obj = d3.select("#result").selectAll("p")
+                .data(dataList)
+                .enter()
+                .append("p")
+                .text(function(d){ return d; });
+            // ボタンクリックで処理をする
+            d3.select("#btn").on("click", function(){
+                // 1ヶ所だけデータを変更する
+                var ptr = Math.floor(Math.random()*dataList.length);
+                var n = Math.floor(Math.random()*100);
+                dataList[ptr] = n;
+                // データを更新（update）
+                obj.data(dataList)
+                    .text(function(d){ return d; }) // 内容を書き換える
+                    .transition()
+                    .duration(100)
+                    .style("color", function(d,i){
+                        if (i==ptr){ // 更新された箇所かを調べる
+                            return "red"; // 更新された箇所か調べる
+                        }else{
+                            return "black"; // そうでない場合は黒色に塗る
+                        }
+                    })
+                    .transition()
+                    .duration(2000)
+                    .style("color", "black");
+            })
+        </script>
+    </body>
+</html>
