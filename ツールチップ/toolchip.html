@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>D3 Test</title>
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+
+        <!-- 重要！ -->
+        <!-- CSS設定 -->
+        <style>
+            .tooltip {
+                position: absolute;
+                text-align: center;
+                width: auto;
+                height: auto;
+                padding: 5px;
+                font: 12px;
+                background: white;
+                -webkit-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8);
+                -moz-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8);
+                box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8);
+                visibility: hidden;
+            }
+
+            .bar:hover {
+                fill: Brown;
+            }
+        </style>
+    </head>
+
+    <body>
+        <script>
+            var dataset = [
+                { "name": "A", "value": 5},
+                { "name": "B", "value": 6 },
+                { "name": "C", "value": 8 },
+                { "name": "D", "value": 1 },
+                { "name": "E", "value": 2 },
+                { "name": "F", "value": 6 },
+                { "name": "G", "value": 8 },
+                { "name": "H", "value": 6 },
+                { "name": "I", "value": 10 },
+                { "name": "J", "value": 9 }
+            ]
+            var width = 600;
+            var height = 400;
+
+            var svg = d3.select("body").append("svg").attr("width", width).attr("height", height);
+
+            var padding = 30;
+
+            // 重要！
+            // 2. tooltip用div要素追加
+            var tooltip = d3.select("body").append("div").attr("class", "tooltip");
+
+            var xScale = d3.scaleBand().rangeRound([padding, width - padding]).padding(0.1)
+                        .domain(dataset.map(function(d) { return d.name; }));
+
+            var yScale = d3.scaleLinear()
+                        .domain([0, d3.max(dataset, function(d) { return d.value; })])
+                        .range([height - padding, padding]);
+
+            var axisx = d3.axisBottom(xScale);
+            var axisy = d3.axisLeft(yScale);
+            svg.append("g")
+                .attr("transform", "translate(" + 0 + "," + (height - padding) + ")")
+                .call(axisx);
+            
+            svg.append("g")
+                .attr("transform", "translate(" + padding + "," + 0 + ")")
+                .call(axisy);
+            
+            svg.append("g")
+                .selectAll("rect")
+                .data(dataset)
+                .enter()
+                .append("rect")
+                .attr("x", function(d) {
+                return xScale(d.name);
+                })
+                .attr("y", function(d) {
+                return yScale(d.value);
+                })
+                .attr("width", xScale.bandwidth())
+                .attr("height", function(d) { return height - padding - yScale(d.value); })
+                .attr("fill", "steelblue")
+                .attr("class", "bar")
+                // 重要！
+                // 3．マウス＆タッチイベント設定
+                .on("mouseover", function(d) {
+                    tooltip
+                        .style("visibility", "visible")
+                        .html("name : " + d.name + "<br>value : " + d.value);
+                })
+                .on("mousemove", function(d) {
+                    tooltip
+                        .style("top", (d3.event.pageY - 20) + "px")
+                        .style("left", (d3.event.pageX + 10) + "px");
+                })
+                .on("mouseout", function() {
+                    tooltip.style("visibility", "hidden");
+                })
+        </script>
+
+    </body>
+</html>

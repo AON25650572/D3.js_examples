@@ -248,3 +248,7 @@ linkDistance()を指定するとノード間の距離を指定できます。距
 
 D3.jsのフォースレイアウト（力学モデル）でノードをドラッグできるようにするには、ノードの円を描画した時にcall(force.drag)を実行します。フォースレイアウトの説明については[こちらのページを参照](http://www.openspc2.org/reibun/D3.js/code/graph/force-layout/0001/index.html)してください。
 
+## ツールチップ
+
+https://wizardace.com/d3-bartooltip/
+
