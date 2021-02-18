@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <!-- <link rel="stylesheet" href="style.css"> -->
+    </head>
+
+    <body>
+        <p>Drag the ball.</p>
+
+        <!-- <img src="https://en.js.cx/clipart/soccer-gate.svg" id="gate" class="droppable"> -->
+        <img src="https://en.js.cx/clipart/ball.svg" id="ball">
+
+        <script>
+            ball.onmousedown = function(event){
+                let shiftX = event.clientX - ball.getBoundingClientRect().left;
+                let shiftY = event.clientY - ball.getBoundingClientRect().top;
+
+                // 移動のための準備：absoluteにし、z-indexでトップにする
+                ball.style.position = "absolute";
+                ball.style.zIndex = 1000;
+                // 現在の親からbodyへ直接移動させ、bodyに対して相対配置をする
+                document.body.append(ball);
+                // ...そしてその絶対配置されたボールをカーソルの下に置く
+
+                moveAt(event.pageX, event.pageY);
+
+                // ボールを（pageX,pageY）座標の中心に置く
+                function moveAt(pageX, pageY){
+                    ball.style.left = pageX - shiftX + "px";
+                    ball.style.top = pageY - shiftY + "px";
+                }
+
+                function onMouseMove(event){
+                    moveAt(event.pageX, event.pageY);
+                }
+
+                // mousemoveでボールを移動する
+                document.addEventListener("mousemove", onMouseMove);
+
+                // ボールをドロップする。不要なハンドラを削除する
+                ball.onmouseup = function(){
+                    document.removeEventListener("mousemove",onMouseMove);
+                    ball.onmouseup = null;
+                };
+            };
+
+            // ドロップした後についてこないように
+            ball.ondragstart = function(){
+                return false;
+            }
+        </script>
+    </body>
+</html>
