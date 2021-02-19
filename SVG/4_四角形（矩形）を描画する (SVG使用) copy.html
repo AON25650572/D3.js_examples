@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>四角形（矩形）を描画する (SVG使用)</title>
+        <link rel="stylesheet" href="../css/main.css">
+        <script src="../d3.v3.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    </head>
+
+    <body>
+        <h1>四角形（矩形）を描画する (SVG使用)</h1>
+        <div id="result"></div>
+
+        <script>
+            var mouse_x;
+            var mouse_y;
+            $(function(){
+                //ページのDOMが全て読みこまれ、
+                //使用可能になった際に実行したい処理を記述。
+                // 要は、開始時一回しか実行されない関数
+                svg.attr("transform", function(d,i){
+                    d.scale=640/svgHeight;
+                    return "translate(" + [ d.x,d.y ] + "),rotate("+d.r+" 160 160),scale("+d.scale+","+d.scale+")";
+                });
+                bar.scrollTop = bar.scrollLeft = bar.scrollHeight/2;
+
+                // マウスの位置
+                window.onload=function(){
+                    //マウス移動時のイベントをBODYタグに登録する
+                    document.body.addEventListener("mousemove", function(e){
+                    
+                        //座標を取得する
+                        mouse_x = e.pageX;  //X座標
+                        mouse_y = e.pageY;  //Y座標
+                    });
+                }
+            });
+
+            var nowpoint = function(){
+                // console.log(move_node);
+                node.attr("x", function(d){
+                    if (d==move_node) { return mouse_x; }
+                    else { return d.x; }
+                })
+                node.attr("y", function(d){
+                    if (d==move_node) { return mouse_y; }
+                    else { return d.y; }
+                })
+            }
+
+            d3.select("#result")
+                .append("svg")
+                .attr("width", 320)
+                .attr("height",240)
+                .append("rect") // 四角形を追加
+                    .attr("x", 80) // x座標を指定
+                    .attr("y", 60) // y座標を指定
+                    .attr("width", 100) // 横幅を指定
+                    .attr("height", 100) // 縦幅を指定
+                    .attr("stroke", "blue") // 線は青色
+                    .attr("fill", "cyan") // 塗りは水色
+                    .attr("stroke-width", 2) // 線幅を指定
+                    .on("mousedown", function(d){
+                        aaa = setInterval(nowpoint, 100);
+                    })
+        </script>
+    </body>
+</html>
